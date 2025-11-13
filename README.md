@@ -42,9 +42,34 @@ o	Power (VCC & GND) and appropriate resistors.
 
 ## Program:
 
+```
+ORG 0000
+L:MOV DPTR,#0100H
+MOV R1,#0AH
+BACK: CLR A
+MOVC A,@A+DPTR
+MOV P2,A
+ACALL D
+INC DPTR
+DJNZ R1,BACK
+SJMP L
+D:MOV R5,#05
+B2:MOV R3,#255 
+B1:MOV R4,#255
+AG:DJNZ R4,AG
+DJNZ R3,B1
+DJNZ R5,B2
+RET
+ORG 0100H
+DB 3FH,06H,5BH,4FH,66H,6DH,7DH,07H,7FH,6FH
+END
+```
 
 ## Output:
 
+<img width="1919" height="1095" alt="image" src="https://github.com/user-attachments/assets/24a2c74d-67ed-4a8e-9169-878b1013f9f5" />
+
+<img width="1919" height="1140" alt="image" src="https://github.com/user-attachments/assets/bdb56514-4059-4dd4-82f3-68342677ed7c" />
 
 ## Result:
 The seven-segment display has been successfully interfaced with the 8051 microcontroller, and the digits 0 to 9 are displayed sequentially using Keil and Proteus.
